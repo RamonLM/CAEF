@@ -1,0 +1,28 @@
+﻿<div class="modal fade" id="editar">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--Header de la ventana-->
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">Editar datos </h3>
+            </div>
+            <div class="modal-body">
+                <!--Contenido de la ventana-->
+                <label>N&uacute;mero de empleado:</label>
+                <input class="form-control input-sm" placeholder="{{usuario.id}}" disabled>
+                <br />
+                <label>Correo:</label>
+                <input class="form-control input-sm" type="email" placeholder="{{usuario.correo}}" disabled>
+                <br />
+                <label>Rol:</label>
+                <select ng-model="rolSeleccionado" ng-options="rol.nombre for rol in listaRoles" class="form-control input-sm">
+                </select>
+            </div>
+            <div class="modal-footer">
+                <!--Footer de la ventana-->
+                <button type="button" ng-click="accept()" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                <button type="button" ng-click="cancel()" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

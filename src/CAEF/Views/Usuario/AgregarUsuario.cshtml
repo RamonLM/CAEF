@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "_Layout";
+}
+<div class="tab-content col-md-10">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Agregar usuario administrativo</h3>
+        </div>
+        <div ng-controller="AgregarController" class="panel-body">
+            <form name="form" class="form-horizontal" novalidate>
+                <div class="form-group">
+                    <label for="numeroEmpleado" class="col-md-3 control-label">N&uacute;mero de empleado:</label>
+                    <div class="col-md-7">
+                        
+                        <input type="number" ng-model="usuario.Id" class="form-control" id="numeroEmpleado" name="matricula" placeholder="Número" required>
+                        <div ng-show="form.$submitted || form.matricula.$touched">
+                            <span ng-show="form.matricula.$error.required">Se requiere una matrícula.</span>
+                            <span ng-show="form.email.$error.number">Sólo se permiten números.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="correoEmpleado" class="col-md-3 control-label">Correo:</label>
+                    <div class="col-md-7">
+                        
+                        <input type="email" name="email" ng-model="usuario.Correo" class="form-control" id="correoEmpleado" placeholder="Correo electrónico" required>
+                        <div ng-show="form.$submitted || form.email.$touched">
+                            <span ng-show="form.email.$error.required">Se necesita un correo.</span>
+                            <span ng-show="form.email.$error.email">Escribe un correo válido.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="rolEmpleado" class="col-md-3 control-label">Rol del administrativo:</label>
+                    <div class="col-md-7">
+                        <select ng-model="usuario.RolId" class="form-control input-sm" required>
+                            <option ng-repeat="rol in roles" value="{{rol.id}}">
+                                {{rol.nombre}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8">
+
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" ng-disabled="form.$invalid" ng-click="agregar()" value="Agregar" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

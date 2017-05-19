@@ -1,0 +1,17 @@
+{
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "angularjs": "1.6.4",
+    "angular-modal-service": "0.11.1",
+    "bootstrap": "3.3.7",
+    "jquery": "3.2.1",
+    "jquery-validation": "1.16.0",
+    "jquery-validation-unobtrusive": "3.2.6",
+    "underscore": "1.8.3",
+    "jpkleemans-angular-validate": "1.1.1"
+  },
+  "resolutions": {
+    "jquery-validation": ">=1.8"
+  }
+}
