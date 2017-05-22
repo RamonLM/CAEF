@@ -81,6 +81,9 @@ namespace CAEF
                     config.Filters.Add(new RequireHttpsAttribute());
                 }
             });
+
+            // SignalR
+            services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -119,6 +122,8 @@ namespace CAEF
                     template: "{controller}/{action}/{id?}",
                     defaults: new { controller = "Login", action = "Inicio" });
             });
+
+            app.UseSignalR();
 
             semillaUABC.GeneraDatosSemilla().Wait();
             semillaCAEF.GeneraDatosSemilla().Wait();

@@ -9,7 +9,8 @@
     "jquery-validation": "1.16.0",
     "jquery-validation-unobtrusive": "3.2.6",
     "underscore": "1.8.3",
-    "jpkleemans-angular-validate": "1.1.1"
+    "jpkleemans-angular-validate": "1.1.1",
+    "signalr": "2.2.2"
   },
   "resolutions": {
     "jquery-validation": ">=1.8"
