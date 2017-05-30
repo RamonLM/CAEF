@@ -1,0 +1,183 @@
+﻿@{
+    Layout = "_Layout";
+}
+<div ng-controller="ActasController" class="tab-content col-md-10">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Solicitud de acta administrativo</h3>
+        </div>
+        <div class="panel-body">
+            <form name="form" role="form" novalidate>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label for="fechaSolicitud">Fecha:</label>
+                            <input type="date" value="{{fecha | date: 'yyyy-MM-dd'}}" class="form-control" id="fechaSolicitud" disabled>
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="perodoEscolarDocente">Periodo escolar:</label>
+                            <input ng-model="acta.Periodo" ng-minlength="6" ng-maxlength="6" type="text" class="form-control" name="periodo" ng-class="{red: form.periodo.$touched && form.periodo.$invalid}" disabled>
+                            <span ng-show="form.periodo.$dirty && form.periodo.$error.required">Se requiere un periodo.</span>
+                            <span ng-show="form.periodo.$dirty && form.periodo.$error.minlength || form.periodo.$error.maxlength">El formato es AÑO-SEMESTRE.</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="cicloEscolar">Ciclo escolar:</label>
+                            <input ng-model="acta.CicloEscolar" ng-minlength="6" ng-maxlength="6" type="text" class="form-control" name="ciclo" ng-class="{red: form.ciclo.$touched && form.ciclo.$invalid}" disabled>
+                            <span ng-show="form.ciclo.$dirty && form.ciclo.$error.required">Se requiere un ciclo.</span>
+                            <span ng-show="form.ciclo.$dirty && form.ciclo.$error.minlength || form.ciclo.$error.maxlength">El formato es AÑO-SEMESTRE.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label for="nombreMateriaDocente">Nombre de la materia:</label>
+                            <select ng-model="acta.materia" ng-change="calculaClaveMateria()" name="nombreMateria" id="nombreMateria" class="form-control input-sm" ng-class="{red: form.nombreMateria.$dirty && form.nombreMateria.$invalid}" required>
+                                <option value="" disabled>{{actaActual.materia.nombre}}</option>
+                                <option ng-repeat="materia in materias | filter: filtraMaterias" value="{{materia}}">
+                                    {{materia.nombre}}
+                                </option>
+                            </select>
+                            <span style="color: red;" ng-show="form.nombreMateria.$dirty && form.nombreMateria.$error.required">Se requiere una materia</span>
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="claveMateria">Clave de la materia:</label>
+                            <input ng-model="actaActual.idMateria" type="text" class="form-control" id="claveMateria" disabled>
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="tipoExamen">Tipo de examen:</label>
+                            <select ng-model="acta.IdTipoExamen" class="form-control" name="tipoExamen" id="tipoExamen" ng-class="{red: form.tipoExamen.$touched && form.tipoExamen.$invalid}" required>
+                                <option value="" disabled>{{actaActual.tipoExamen.nombre}}</option>
+                                <option ng-repeat="tipo in tipos" value="{{tipo.id}}">
+                                    {{tipo.nombre}}
+                                </option>
+                            </select>
+                            <span style="color: red;" ng-show="form.tipoExamen.$touched && form.tipoExamen.$error.required">Se requiere escoger un tipo</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label for="subtipoExamen">Subtipo de examen:</label>
+                            <select ng-model="acta.IdSubtipoExamen" name="subtipoExamen" class="form-control" ng-class="{red: form.subtipoExamen.$touched && form.subtipoExamen.$invalid}" required>
+                                <option ng-repeat="subtipo in subtipos" value="{{subtipo.id}}">
+                                    {{subtipo.nombre}}
+                                </option>
+                            </select>
+                            <span style="color: red;" ng-show="form.subtipoExamen.$touched && form.subtipoExamen.$error.required">Se requiere escoger un subtipo</span>
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="planEstudios">Plan de estudios:</label>
+                            <input ng-model="acta.PlanEstudios" type="text" class="form-control" name="planEstudios" ng-class="{red: form.planEstudios.$touched && form.planEstudios.$invalid}" required>
+                            <span style="color: red;" ng-show="form.planEstudios.$touched && form.planEstudios.$error.required">Se requiere un plan de estudios</span>
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="semestre">Semestre:</label>
+                            <input ng-model="acta.EtapaSemestre" type="text" class="form-control" name="etapaSemestre" ng-class="{red: form.etapaSemestre.$touched && form.etapaSemestre.$invalid}" required>
+                            <span style="color: red;" ng-show="form.etapaSemestre.$touched && form.etapaSemestre.$error.required">Se requiere un semestre</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label for="carreraDocente">Carrera:</label>
+                            <select ng-model="acta.Carrera" ng-change="calculaClaveCarrera()" name="carreraDocente" id="carreraDocente" class="form-control input-sm" ng-class="{red: form.carreraDocente.$touched && form.carreraDocente.$invalid}" required>
+                                <option value="" disabled>{{actaActual.carrera.nombre}}</option> 
+                                <option  ng-repeat="carrera in carreras" value="{{carrera}}">
+                                    {{carrera.nombre}}
+                                </option>
+                            </select>
+                            <span style="color: red;" ng-show="form.carreraDocente.$touched && form.carreraDocente.$error.required">Se requiere escoger una carrera</span>
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="claveCarreraDocente">Clave de la carrera:</label>
+                            <input ng-model="actaActual.idCarrera" type="text" class="form-control" id="claveCarreraDocente" disabled>
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="grupoDocente">Grupo:</label>
+                            <input ng-model="alumnoActual[0].alumno.grupo" type="number" class="form-control" name="grupoDocente" id="grupoDocente" ng-class="{red: form.grupoDocente.$touched && form.grupoDocente.$invalid}" required>
+                            <span style="color: red;" ng-show="form.grupoDocente.$touched && form.grupoDocente.$error.required">Se requiere un grupo</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label for="nombreDocente">Nombre</label>
+                            <input ng-model="actaActual.empleado.nombre" type="text" class="form-control" id="nombreDocente" disabled>
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="apellidoPaterno">Apellido paterno:</label>
+                            <input ng-model="actaActual.empleado.apellidoP" type="text" class="form-control" id="apellidoPaterno" disabled>
+                        </div>
+                        <div class="col-xs-2">
+                            <label for="apellidoMaterno">Apellido materno:</label>
+                            <input ng-model="actaActual.empleado.apellidoM" type="text" class="form-control" id="apellidoMaterno" disabled>
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="numeroEmpleadoDocente">Numero de empleado:</label>
+                            <input type="number" ng-model="actaActual.empleado.id" class="form-control" id="numeroEmpleadoDocente" disabled>
+                        </div>
+                    </div>
+                </div>
+                <!--inicio de la tabla para agregar alumnos-->
+                <div class="row">
+                    <div class="col-xs-10">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Datos del alumno:</div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Matricula:</th>
+                                            <th>Nombre(s):</th>
+                                            <th>Apellido paterno:</th>
+                                            <th>Apellido materno:</th>
+                                            <th>Calificaci&oacute;n:</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody> 
+                                        <tr ng-repeat="solicitud in solicitudesAlumno">
+                                            <td><input ng-model="solicitud.alumno.id" name="Matricula" type="number" class="form-control" ng-class="{red: form.Matricula.$touched && form.Matricula.$invalid}" pattern="[[0-9.]+" ng-pattern-restrict required></td>
+                                            <td><input ng-model="solicitud.alumno.nombre" name="Nombre" type="text" class="form-control" ng-class="{red: form.Nombre.$touched && form.Nombre.$invalid}" pattern="[A-zÀ-ÿ]+" ng-pattern-restrict required></td>
+                                            <td><input ng-model="solicitud.alumno.apellidoP" name="ApellidoP" type="text" class="form-control" ng-class="{red: form.ApellidoP.$touched && form.ApellidoP.$invalid}" pattern="[A-zÀ-ÿ]+" ng-pattern-restrict required></td>
+                                            <td><input ng-model="solicitud.alumno.apellidoM" name="ApellidoM" type="text" class="form-control" ng-class="{red: form.ApellidoM.$touched && form.ApellidoM.$invalid}" pattern="[A-zÀ-ÿ]+" ng-pattern-restrict required></td>
+                                            <td><input ng-model="solicitud.alumno.promedio" name="Promedio" type="number" class="form-control" ng-class="{red: form.Promedio.$touched && form.Promedio.$invalid}" pattern="[[0-9.]+" ng-pattern-restrict required></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--fin de la tabla para agregar alumnos-->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <button ng-click="agregarColumna()" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar columna</button>
+                            <button ng-click="removerColumna()" type="button" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-minus-sign"></span> Eliminar columna</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <label for="motivoDocente">Motivo por el cual se hace la solicitud:</label>
+                            <textarea ng-model="acta.Motivo" class="form-control" rows="4" name="motivo" ng-class="{red: form.motivo.$touched && form.motivo.$invalid}" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <button ng-click="grabarActaAdminActual()" type="button" value="Enviar" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span>Aceptar Solicitud</button>
+                                <button ng-click="rechazarActaAdminActual()" type="button" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-minus-sign"></span>Rechazar Solicitud</button>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div><!-- tab content -->
