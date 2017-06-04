@@ -27,6 +27,32 @@ namespace CAEF.Services
                 .Include(u => u.Rol)
                 .ToList();*/
         }
+
+        public Usuario ObtenerUsuario(int id)
+        {
+            return _repositorioUsuario.BuscarID(id);
+        }
+
+        public Materia ObtenerMateria(int id)
+        {
+            return _contextoCAEF.Materias.Where(m => m.Id == id).FirstOrDefault();
+        }
+
+        public Carrera ObtenerCarrera(int id)
+        {
+            return _contextoCAEF.Carreras.Where(c => c.Id == id).FirstOrDefault();
+        }
+
+        public TipoExamen ObtenerTipoExamen(int id)
+        {
+            return _contextoCAEF.TiposExamen.Where(t => t.Id == id).FirstOrDefault();
+        }
+
+        public SubtipoExamen ObtenerSubtipoExamen(int id)
+        {
+            return _contextoCAEF.SubtiposExamen.Where(s => s.Id == id).FirstOrDefault();
+        }
+
         public void AgregarUsuario(Usuario usuario)
         {
             // Al agregar usuario nuevo, solo se pide matrícula,

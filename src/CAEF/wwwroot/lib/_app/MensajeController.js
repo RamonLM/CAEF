@@ -1,0 +1,1 @@
+app.controller("MensajeController",["$scope","mensaje","close",function(e,n,o){e.mensaje=n,e.close=function(){o(!0,500)}}]);

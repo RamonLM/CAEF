@@ -1,0 +1,7 @@
+{
+  "ConexionesBD": {
+    "ConexionUsuariosUABC": "Server=tcp:usuarios-uabc.database.windows.net,1433;Initial Catalog=UsuariosUABC;Persist Security Info=False;User ID=rlopez;Password=Starwebs1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "ConexionUsuariosFIAD": "Server=tcp:usuarios-fiad.database.windows.net,1433;Initial Catalog=UsuariosFIAD;Persist Security Info=False;User ID=rlopez;Password=Starwebs1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "ConexionCAEF": "Server=tcp:dbcaef.database.windows.net,1433;Initial Catalog=dbCAEF;Persist Security Info=False;User ID=rlopez;Password=Starwebs1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+  }
+}

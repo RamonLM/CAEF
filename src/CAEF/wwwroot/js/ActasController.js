@@ -120,7 +120,7 @@
         $scope.acta.Comentario = $scope.acta.Motivo;
 
         angular.forEach($scope.solicitudesAlumno, function (value, key) {
-            $scope.solicitudesAlumno[key].Alumno.Grupo = $scope.grupo;
+            $scope.solicitudesAlumno[key].alumno.grupo = $scope.grupo;
         });
 
         console.log($scope.acta);

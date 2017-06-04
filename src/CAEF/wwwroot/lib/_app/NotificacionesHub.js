@@ -1,0 +1,1 @@
+var notificacionesHub;$().ready(function(){(notificacionesHub=$.connection.notificacionesHub).client.reportConnections=function(n){$("#online").text(n)},$.connection.hub.start()});

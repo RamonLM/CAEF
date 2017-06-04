@@ -86,11 +86,23 @@
     <script src="~/lib/angularjs/angular.min.js"></script>
     <script src="~/lib/jpkleemans-angular-validate/dist/angular-validate.min.js"></script>
     <script src="~/lib/angular-modal-service/dst/angular-modal-service.min.js"></script>
-    <script src="~/js/App.js"></script>
-    <script src="~/js/LoginController.js"></script>
-    <script src="~/js/MenuController.js"></script>
-    <script src="~/js/MensajeController.js"></script>
-    <script src="~/js/UsuariosController.js"></script>
-    <script src="~/js/ActasController.js"></script>
+
+    <environment names="Development">
+        <script src="~/js/App.js"></script>
+        <script src="~/js/LoginController.js"></script>
+        <script src="~/js/MenuController.js"></script>
+        <script src="~/js/MensajeController.js"></script>
+        <script src="~/js/UsuariosController.js"></script>
+        <script src="~/js/ActasController.js"></script>
+    </environment>
+    
+    <environment names="Production,Staging">
+        <script src="~/lib/_app/App.js"></script>
+        <script src="~/lib/_app/LoginController.js"></script>
+        <script src="~/lib/_app/MenuController.js"></script>
+        <script src="~/lib/_app/MensajeController.js"></script>
+        <script src="~/lib/_app/UsuariosController.js"></script>
+        <script src="~/lib/_app/ActasController.js"></script>
+    </environment>
 </body>
 </html>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CAEF.Models.Contexts;
 using CAEF.Models.Entities.CAEF;
+using Microsoft.EntityFrameworkCore;
 
 namespace CAEF.Services
 {
@@ -73,6 +74,23 @@ namespace CAEF.Services
                 .FirstOrDefault();
 
             return solicitud;
+        }
+
+        public SolicitudAdmin ObtenerSolicitudAdmin(int id)
+        {
+            SolicitudAdmin solicitud = _contextoCAEF.SolicitudesAdministrativo
+                .Where(s => s.IdSolicitud == id)
+                .FirstOrDefault();
+
+            return solicitud;
+        }
+
+        public IEnumerable<SolicitudAlumno> ObtenerSolicitudesAlumno(int id)
+        {
+            return _contextoCAEF.SolicitudesAlumno
+                .Include(s => s.Alumno)
+                .Where(s => s.IdSolicitud == id)
+                .ToList();
         }
     }
 }
