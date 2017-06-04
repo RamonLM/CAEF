@@ -1,7 +1,7 @@
 {
   "ConexionesBD": {
-    "ConexionUsuariosUABC": "Data Source=DESKTOP-8PHO4VL;Database=UsuariosUABC;MultipleActiveResultSets=true;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
-    "ConexionUsuariosFIAD": "Data Source=DESKTOP-8PHO4VL;Database=UsuariosFIAD;MultipleActiveResultSets=true;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
-    "ConexionCAEF": "Data Source=DESKTOP-8PHO4VL;Database=dbCAEF;MultipleActiveResultSets=true;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+    "ConexionUsuariosUABC": "Data Source=DESKTOP-B3TDCA4\\SQLEXPRESS;Database=UsuariosUABC;MultipleActiveResultSets=true;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
+    "ConexionUsuariosFIAD": "Data Source=DESKTOP-B3TDCA4\\SQLEXPRESS;Database=UsuariosFIAD;MultipleActiveResultSets=true;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
+    "ConexionCAEF": "Data Source=DESKTOP-B3TDCA4\\SQLEXPRESS;Database=dbCAEF;MultipleActiveResultSets=true;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
   }
 }

@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Sistema de Control de Actas de Evalucaci&oacute;n Final";
+    ViewBag.PageName = "Notifiaciones";
+    Layout = "_Layout";
+}
+<div class="tab-content col-md-10">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Lista de solicitudes de acta</h3>
+        </div>
+        <div ng-controller="ActasController" class="panel-body">
+            <label align="center">Buscar solicitud por</label>
+            <table class="table table-bordered">
+                <thead>
+                <th>Fecha</th>
+                <th>Docente</th>
+                <th>Materia</th>
+                <th>Tipo examen</th>
+                <th>Periodo</th>
+                <th>Semestre</th>
+                <th>Estado</th>
+                </thead>
+                <tbody>
+                <td><input type="text" class="form-control" ng-model="filtros.fecha"id="NombreMateria" placeholder="Fecha"></td>
+                <td><input type="text" class="form-control"ng-model="filtros.docente"id="NombreMateria" placeholder="Docente"></td>
+                <td><input type="text" class="form-control"ng-model="filtros.materia"id="NombreMateria" placeholder="Materia"></td>
+                <td><input type="text" class="form-control"ng-model="filtros.tipoExamen"id="NombreMateria" placeholder="TipoMateria"></td>
+                <td><input type="text" class="form-control"ng-model="filtros.periodo"id="NombreMateria" placeholder="Periodo"></td>
+                <td><input type="text" class="form-control"ng-model="filtros.semestre"id="NombreMateria" placeholder="Semestre"></td>
+                <td><input type="text" class="form-control"ng-model="filtros.estado"id="NombreMateria" placeholder="Estado"></td>
+                </tbody>
+            </table>
+            <center>
+                <button type="button" class="btn btn-default" ng-click="mostrarActas()"><span class="glyphicon glyphicon-ok-circle"></span> Aplicar filtro</button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span> Borrar filtro</button>
+            </center>
+            <h2>Solicitudes</h2>
+            <div class="text-danger" ng-show="error">{{error}}</div>
+            <table class="table table-bordered">
+                <thead>
+                <th>Fecha</th>
+                <th>Docente</th>
+                <th>Materia</th>
+                <th>Tipo examen</th>
+                <th>Periodo</th>
+                <th>Semestre</th>
+                <th>Estado</th>
+                <th>Visualizar</th>
+                <th>Archivo</th>
+                <th>PDF</th>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat="acta in mActas">
+                        <td>{{acta.fechaAceptacion | date :'M/d/yyyy'}}</td>
+                        <td>{{acta.solicitudDocente.empleado.nombre}}</td>
+                        <td>{{acta.solicitudDocente.materia.nombre}}</td>
+                        <td>{{acta.solicitudDocente.tipoExamen.nombre}}</td>
+                        <td>{{acta.cicloEscolar}}</td>
+                        <td>{{acta.etapaSemestre}}</td>
+                        <td>{{acta.solicitudDocente.estado.nombre}}</td>    
+                        <td><a ng-hide="acta.idEstado === 2" class="btn btn-primary btn-xs" data-toggle="modal" href="/VerActa/{{acta.idSolicitud}}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td><a ng-hide="acta.idEstado === 2" class="btn btn-primary btn-xs" data-toggle="modal" href="/RevisarActa/{{acta.id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td><a ng-hide="acta.idEstado === 2" class="btn btn-primary btn-xs" data-toggle="modal" href="/RevisarActa/{{acta.id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

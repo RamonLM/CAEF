@@ -176,6 +176,27 @@ namespace CAEF.Services
 
         }
 
+        public IEnumerable<SolicitudAdmin> ObtenerSolicitudesDocente(Usuario usuario)
+        {
+
+            return _repositorioSolicitudes.ObtenerSolicitudesDocentes(usuario.Id);
+
+
+        }
+
+        public IEnumerable<SolicitudAdmin> MostrarSolicitudesAdministrativos(Usuario usuario,DateTime? fecha, string nombreDocente, string materia, string tipoExamen, string periodo, string semestre,string estado)
+        {
+            //if (usuario.RolId == 1)
+            //{
+            return _repositorioSolicitudes.ObtenerSolcitudesAdministrador(fecha, nombreDocente, materia, tipoExamen, periodo, semestre, estado);
+            //}
+            //else
+            //{
+            //    return _repositorioSolicitudes.BuscarSolicitudesAdministrativos(usuario.Id);
+            //}
+
+        }
+
 
         public bool AlumnoExiste(int Id)
         {
@@ -199,6 +220,20 @@ namespace CAEF.Services
         {
             SolicitudDocente solicitud = _contextoCAEF.SolicitudesDocente
                 .Where(s => s.Id == id)
+                .FirstOrDefault();
+
+            return solicitud;
+        }
+
+        public SolicitudAdmin ObtenerSolicitudAministrativa(int id)
+        {
+            SolicitudAdmin solicitud = _contextoCAEF.SolicitudesAdministrativo
+                .Include(s => s.SubTipoExamen)
+                .Include(s=> s.SolicitudDocente)
+                .Include(s => s.SolicitudDocente.Carrera)
+                .Include(s => s.SolicitudDocente.Materia)
+                .Include(s => s.SolicitudDocente.TipoExamen)
+                .Where(s => s.IdSolicitud == id)
                 .FirstOrDefault();
 
             return solicitud;
