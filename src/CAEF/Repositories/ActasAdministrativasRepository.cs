@@ -74,5 +74,37 @@ namespace CAEF.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public List<SolicitudAdmin> ObtenerSolcitudesAdministrador(DateTime? fecha, string nombreDocente, string materia, string tipoExamen, string periodo, string semestre, string estado)
+        {
+            //int idDocente;
+            string nombreDocenteBase;
+            //idDocente = _contextoCAEF.SolicitudesAdministrativo.Where(s=> s.SolicitudDocente.Empleado.Nombre)
+
+            return _contextoCAEF.SolicitudesAdministrativo.
+                 Include(sa => sa.SolicitudDocente.Materia).
+                 Include(sa => sa.SolicitudDocente.Estado).
+                 Include(sa => sa.SolicitudDocente.Empleado).
+                 Include(sa => sa.SolicitudDocente.TipoExamen).
+                 Where(sa => (((fecha == null) && (sa.FechaAceptacion == sa.FechaAceptacion)) || ((fecha != null) && (sa.FechaAceptacion == fecha)))
+                         &&  (((nombreDocente == null))  || ((nombreDocente != null) && (sa.SolicitudDocente.Empleado.Nombre + " " + sa.SolicitudDocente.Empleado.ApellidoP + " " + sa.SolicitudDocente.Empleado.ApellidoM == nombreDocente)))
+                         &&  (((materia == null) && (sa.SolicitudDocente.Materia.Nombre == sa.SolicitudDocente.Materia.Nombre)) || ((materia != null) && (sa.SolicitudDocente.Materia.Nombre == materia)))
+                         &&  (((tipoExamen == null) && (sa.SolicitudDocente.TipoExamen.Nombre == sa.SolicitudDocente.TipoExamen.Nombre)) || ((tipoExamen != null) && (sa.SolicitudDocente.TipoExamen.Nombre == tipoExamen)))
+                         &&  (((periodo == null) && (sa.CicloEscolar == sa.CicloEscolar)) || ((periodo != null) && (sa.CicloEscolar == periodo)))
+                         &&  (((semestre == null) && (sa.EtapaSemestre == sa.EtapaSemestre)) || ((semestre != null) && (sa.EtapaSemestre == semestre)))
+                         &&  (((estado == null) && (sa.SolicitudDocente.Estado.Nombre == sa.SolicitudDocente.Estado.Nombre)) || ((estado != null) && (sa.SolicitudDocente.Estado.Nombre == estado)))).
+                 ToList();
+        }
+
+        public List<SolicitudAdmin> ObtenerSolicitudesDocentes(int idEmpleado)
+        {
+            return _contextoCAEF.SolicitudesAdministrativo.
+                  Include(sa => sa.SolicitudDocente.Materia).
+                 Include(sa => sa.SolicitudDocente.Estado).
+                 Include(sa => sa.SolicitudDocente.Empleado).
+                 Include(sa => sa.SolicitudDocente.TipoExamen).
+                  Where(sa => sa.SolicitudDocente.IdEmpleado == idEmpleado).
+                  ToList();
+        }
     }
 }

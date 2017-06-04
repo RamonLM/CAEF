@@ -66,34 +66,55 @@ namespace CAEF.Controllers
             }
         }
 
+
         [Authorize]
-        [HttpGet("Acta/{id?}")]
-        public IActionResult SolicitarActaGenerada(int id)
+        [HttpGet("VerActa/{id?}")]
+        public IActionResult VerActa(int id)
         {
+            #region >v
+            //var usuarioActual = _servicioUsuario.UsuarioAutenticado(User.Identity.Name);
+            //SolicitudDocente solicitud = _servicioSolicitud.ObtenerSolicitudDocente(id);
+
+            //if (solicitud == null)
+            //    return Redirect("/");
+            //else if (usuarioActual.RolId == 1)
+            //    return View();
+            //else
+            //    return Redirect("/");
+            #endregion
+
             var usuarioActual = _servicioUsuario.UsuarioAutenticado(User.Identity.Name);
-            SolicitudDocente solicitud = _servicioSolicitud.ObtenerSolicitudDocente(id);
+            SolicitudAdmin solicitud = _servicioSolicitud.ObtenerSolicitudAministrativa(id);
 
             if (solicitud == null)
                 return Redirect("/");
-            else if (usuarioActual.RolId == 1)
+            else 
                 return View();
-            else
-                return Redirect("/");
         }
 
         [Authorize]
-        [HttpGet("CAEF/Acta/{id?}")]
-        public IActionResult VerActa(int id)
+        [HttpGet("CAEF/VerActa/{id?}")]
+        public IActionResult VerActaA(int id)
         {
+            #region alomejor se ocupa :v
+            //var usuarioActual = _servicioUsuario.UsuarioAutenticado(User.Identity.Name);
+            //SolicitudDocente solicitud = _servicioSolicitud.ObtenerSolicitudDocente(id);
+
+            //if (solicitud == null)
+            //    return Redirect("/");
+            //else if (usuarioActual.RolId == 1)
+            //    return Ok(solicitud);
+            //else
+            //    return Redirect("/");
+            #endregion
+
             var usuarioActual = _servicioUsuario.UsuarioAutenticado(User.Identity.Name);
-            SolicitudDocente solicitud = _servicioSolicitud.ObtenerSolicitudDocente(id);
+            SolicitudAdmin solicitud = _servicioSolicitud.ObtenerSolicitudAministrativa(id);
 
             if (solicitud == null)
                 return Redirect("/");
-            else if (usuarioActual.RolId == 1)
-                return Ok(solicitud);
             else
-                return Redirect("/");
+                return Ok(solicitud);
         }
 
         [Authorize]

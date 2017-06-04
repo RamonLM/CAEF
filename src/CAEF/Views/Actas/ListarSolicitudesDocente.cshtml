@@ -15,19 +15,25 @@
                 <thead>
                     <tr>
                         <th>Fecha</th>
-                        <th>Folio</th>
                         <th>Materia</th>
+                        <th>Tipo Examen</th>
+                        <th>Periodo</th>
+                        <th>Semestre</th>
                         <th>Estado</th>
-                        <th>Detalles</th>
+                        <th>Visualizar</th>
+                        <th>PDF </th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr ng-repeat="acta in actas">
-                        <td>{{acta.fechaCreacion | date :'M/d/yyyy'}}</td>
-                        <td>{{acta.id}}</td>
-                        <td>{{acta.materia.nombre}}</td>
-                        <td>{{acta.estado.nombre}}</td>
+                    <tr ng-repeat="acta in mActasD">
+                        <td>{{acta.fechaAceptacion | date :'M/d/yyyy'}}</td>
+                        <td>{{acta.solicitudDocente.materia.nombre}}</td>
+                        <td>{{acta.solicitudDocente.tipoExamen.nombre}}</td>
+                        <td>{{acta.cicloEscolar}}</td>
+                        <td>{{acta.etapaSemestre}}</td>
+                        <td>{{acta.solicitudDocente.estado.nombre}}</td>
+                        <td><a ng-hide="acta.idEstado === 2" class="btn btn-primary btn-xs" data-toggle="modal" href="/VerActa/{{acta.idSolicitud}}"><span class="glyphicon glyphicon-edit"></span></a></td>
                         <td><a ng-hide="acta.idEstado === 2" class="btn btn-primary btn-xs" data-toggle="modal" href="/RevisarActa/{{acta.id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
                     </tr>
                 </tbody>

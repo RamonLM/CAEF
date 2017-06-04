@@ -18,7 +18,15 @@
     $scope.tipos = []
     // Fecha actual
     $scope.alumnoActual = []
-
+    //filtros para la busqueda de las solicitudes
+    $scope.filtros = {
+        docente: "",
+        materia: "",
+        tipoExamen: "",
+        periodo: "",
+        semestre: "",
+        estado:""
+    };
     $scope.fecha = new Date();
     // Solicitudes de cada alumno
 
@@ -45,6 +53,28 @@
             });
     }
 
+    $scope.mostrarActas = function () {
+        console.log($scope.filtros);
+        $http.post("/Usuarios/Actas", $scope.filtros)
+            .then(function (response) {
+                console.log(response.data);
+                $scope.mActas = response.data;
+            }, function (error) {
+                $scope.error = "Error al obtener usuarios: " + error;
+            });
+    }
+
+    $scope.mostrarActasD = function () {
+        console.log($scope.filtros);
+        $http.get("/Usuarios/ActasD")
+            .then(function (response) {
+                console.log(response.data);
+                $scope.mActasD = response.data;
+            }, function (error) {
+                $scope.error = "Error al obtener usuarios: " + error;
+            });
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     $scope.revisarActaAdmin = function () {
         console.log($scope.idSolicitudActual)
@@ -53,6 +83,18 @@
                 //console.log(response.data);
                 $scope.actaActual = response.data;
                 console.log($scope.actaActual);
+            }, function (error) {
+                $scope.error = "Error al obtener la acta: " + error;
+            });
+    }
+
+    $scope.verActaAdmin = function () {
+        console.log($scope.idSolicitudActual)
+        $http.get("/CAEF/VerActa/" + $scope.idSolicitudActual)
+            .then(function (response) {
+                //console.log(response.data);
+                $scope.actaActualAdmin = response.data;
+                console.log($scope.actaActualAdmin);
             }, function (error) {
                 $scope.error = "Error al obtener la acta: " + error;
             });
@@ -248,7 +290,7 @@
             }, function (error) {
                 console.log(error);
                 ModalService.showModal({
-                    templateUrl: "http://localhost:52244/views/mensajegenerico.html",
+                    templateUrl: "http://computo.ens.uabc.mx/views/mensajegenerico.html",
                     controller: "MensajeController",
                     inputs: {
                         mensaje: error.data
@@ -285,7 +327,7 @@
 
 
                                 ModalService.showModal({
-                                    templateUrl: "http://localhost:52244/views/mensajeGenerico.html",
+                                    templateUrl: "http://computo.ens.uabc.mx/views/mensajeGenerico.html",
                                     controller: "MensajeController",
                                     inputs: {
                                         mensaje: response.data
@@ -303,7 +345,7 @@
                             }, function (error) {
                                 console.log(error);
                                 ModalService.showModal({
-                                    templateUrl: "http://localhost:52244/views/mensajeGenerico.html",
+                                    templateUrl: "http://computo.ens.uabc.mx/views/mensajeGenerico.html",
                                     controller: "MensajeController",
                                     inputs: {
                                         mensaje: error.data
@@ -319,7 +361,7 @@
                     }, function (error) {
                         console.log(error);
                         ModalService.showModal({
-                            templateUrl: "http://localhost:52244/views/mensajeGenerico.html",
+                            templateUrl: "http://computo.ens.uabc.mx/views/mensajeGenerico.html",
                             controller: "MensajeController",
                             inputs: {
                                 mensaje: error.data
@@ -335,7 +377,7 @@
             }, function (error) {
                 console.log(error);
                 ModalService.showModal({
-                    templateUrl: "http://localhost:52244/views/mensajeGenerico.html",
+                    templateUrl: "http://computo.ens.uabc.mx/views/mensajeGenerico.html",
                     controller: "MensajeController",
                     inputs: {
                         mensaje: error.data
@@ -364,7 +406,7 @@
         $scope.acta.Comentario = $scope.acta.Motivo;
 
         angular.forEach($scope.solicitudesAlumno, function (value, key) {
-            $scope.solicitudesAlumno[key].Alumno.Grupo = $scope.grupo;
+            $scope.solicitudesAlumno[key].alumno.grupo = $scope.grupo;
         });
 
         console.log($scope.acta);
@@ -464,7 +506,7 @@
 
 
         ModalService.showModal({
-            templateUrl: "http://localhost:52244/views/rechazarActa.html",
+            templateUrl: "http://computo.ens.uabc.mx/views/rechazarActa.html",
             controller: "RechazarController",
             inputs: {
                 actaActual: $scope.actaActual
@@ -498,7 +540,7 @@
                         }, function (error) {
                             console.log(error);
                             ModalService.showModal({
-                                templateUrl: "http://localhost:52244/views/mensajeGenerico.html",
+                                templateUrl: "http://computo.ens.uabc.mx/views/mensajeGenerico.html",
                                 controller: "MensajeController",
                                 inputs: {
                                     mensaje: error.data
@@ -616,7 +658,7 @@
             }, function (error) {
                 console.log(error);
                 ModalService.showModal({
-                    templateUrl: "http://localhost:52244/views/mensajegenerico.html",
+                    templateUrl: "http://computo.ens.uabc.mx/views/mensajegenerico.html",
                     controller: "MensajeController",
                     inputs: {
                         mensaje: error.data
@@ -657,7 +699,7 @@
                     }, function (error) {
                         console.log(error);
                         ModalService.showModal({
-                            templateUrl: "http://localhost:52244/views/mensajegenerico.html",
+                            templateUrl: "http://computo.ens.uabc.mx/views/mensajegenerico.html",
                             controller: "MensajeController",
                             inputs: {
                                 mensaje: error.data
@@ -673,7 +715,7 @@
             }, function (error) {
                 console.log(error);
                 ModalService.showModal({
-                    templateUrl: "http://localhost:52244/views/mensajegenerico.html",
+                    templateUrl: "http://computo.ens.uabc.mx/views/mensajegenerico.html",
                     controller: "MensajeController",
                     inputs: {
                         mensaje: error.data
@@ -688,12 +730,14 @@
 
     }
 
-
+    $scope.mostrarActasD();
+    $scope.verActaAdmin();
     $scope.revisarActaAdmin();
     $scope.obtenerAlumnosDeActas();
     $scope.inicializarAlumnosEnActa();
     $scope.revisarActaDocente();
     $scope.obtenerActas();
+    $scope.mostrarActas();
     $scope.obtenerUsuarioAutenticado();
     $scope.obtenerCarreras();
     $scope.obtenerMaterias();
