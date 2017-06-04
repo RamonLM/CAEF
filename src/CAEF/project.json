@@ -53,6 +53,7 @@
 
   "runtimeOptions": {
     "configProperties": {
+
       "System.GC.Server": true
     }
   },
@@ -60,7 +61,14 @@
   "publishOptions": {
     "include": [
       "wwwroot",
-      "web.config"
+      "web.config",
+      "Views",
+      "Controllers",
+      "Hubs",
+      "Models",
+      "Repositories",
+      "Services",
+      "config.json"
     ]
   },
 

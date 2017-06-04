@@ -12,6 +12,8 @@ namespace CAEF.Repositories.Interfaces
         List<SolicitudDocente> BuscarSolicitudesAdministrativos(int idEmpleado);
         SolicitudDocente BuscarSolicitud(int idActa);
         List<SolicitudAlumno> BuscarAlumnos(int idActa);
+        List<SolicitudAdmin> ObtenerSolcitudesAdministrador(DateTime? fecha,string nombreDocente,string materia,string tipoExamen,string periodo,string semestre,string estado);
         Usuario BuscarDocente(int idDocente);
+        List<SolicitudAdmin> ObtenerSolicitudesDocentes(int idEmpleado);
     }
 }
