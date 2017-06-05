@@ -9,6 +9,7 @@ namespace CAEF.Models.DTO
 {
     public class ActaDocenteDTO
     {
+        public int Id { get; set; }
         [Required]
         public int IdMateria { get; set; }
         [Required]

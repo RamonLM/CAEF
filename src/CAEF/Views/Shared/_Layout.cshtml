@@ -27,7 +27,7 @@
             <ul ng-controller="MenuController" class="nav nav-pills nav-stacked col-md-2">
                 <li><label><span class="glyphicon glyphicon-user"></span> {{usuarioAutenticado.nombre}}</label></li>
                 <li><label>Online: <span id="online">0</span></label></li>
-                <li ng-class="{ active: isActive('/')}" ><a href="/"><span class="glyphicon glyphicon-home"></span>  Inicio</a></li>
+                <li ng-class="{ active: isActive('/')}"><a href="/"><span class="glyphicon glyphicon-home"></span>  Inicio</a></li>
                 <li ng-show="usuarioAutenticado.rolId == 1" ng-class="{ active: isActive('/AgregarUsuario') || isActive('/Usuarios')}" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <span class="glyphicon glyphicon-user"></span> Usuarios<span class="caret"></span>
@@ -50,18 +50,15 @@
                         <li>
                             <a href="~/Acta">Solicitar acta</a>
                         </li>
-
                         <li role="presentation" class="divider"></li>
                         <li>
-                            <a href="#">Mostrar actas</a>
+                            <a href="~/Actas">Mostrar actas</a>
                         </li>
                     </ul>
                 </li>
-
-                <li><a href="#" data-toggle="pill"><span class="glyphicon glyphicon-bell"></span>  Notificaciones<span class="badge">1</span></a></li>
+                <li><a href="~/Notificaciones"><span class="glyphicon glyphicon-bell"></span>  Notificaciones</a></li>
                 <li><a href="#" data-toggle="pill"><span class="glyphicon glyphicon-info-sign"></span> Ayuda</a></li>
                 <li><a href="~/Logout"><span class="glyphicon glyphicon-off"></span> Cerrar sesi&oacute;n</a></li>
-
             </ul>
             @RenderBody()
         </div><!-- end of container -->

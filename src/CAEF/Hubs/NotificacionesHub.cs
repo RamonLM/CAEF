@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace CAEF.Hubs
 {
-    public class NotificacionesHub:Hub
+    public class NotificacionesHub : Hub
     {
         public static int ConnectionCount = 0;
 

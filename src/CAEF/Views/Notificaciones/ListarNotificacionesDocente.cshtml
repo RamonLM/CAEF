@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Sistema de Control de Actas de Evalucaci&oacute;n Final";
+    ViewBag.PageName = "Notifiaciones";
+    Layout = "_Layout";
+}
+<div class="tab-content col-md-10" ng-app="caef">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Notificaciones</h3>
+        </div>
+        <div ng-controller="ActasController" class="panel-body">
+            <div class="text-danger" ng-show="error">{{error}}</div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Folio</th>
+                        <th>Materia</th>
+                        <th>Estado</th>
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat="acta in actas">
+                        <td>{{acta.fechaCreacion | date :'M/d/yyyy'}}</td>
+                        <td>{{acta.id}}</td>
+                        <td>{{acta.materia.nombre}}</td>
+                        <td>{{acta.estado.nombre}}</td>
+                        <td><a ng-hide="acta.idEstado === 2" class="btn btn-primary btn-xs" data-toggle="modal" href="/RevisarActa/{{acta.id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -32,7 +32,8 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <label for="nombreMateriaDocente">Nombre de la materia:</label>
-                            <select ng-model="acta.Materia" ng-change="calculaClaveMateria()" name="nombreMateria" id="nombreMateria" class="form-control input-sm" ng-class="{red: form.nombreMateria.$dirty && form.nombreMateria.$invalid}" required>
+                            <select ng-model="acta.materia" ng-change="calculaClaveMateria()" name="nombreMateria" id="nombreMateria" class="form-control input-sm" ng-class="{red: form.nombreMateria.$dirty && form.nombreMateria.$invalid}" required disabled>
+                                <option value="" disabled>{{actaActualAdmin.solicitudDocente.materia.nombre}}</option>
                                 <option ng-repeat="materia in materias | filter: filtraMaterias" value="{{materia}}">
                                     {{materia.nombre}}
                                 </option>
@@ -41,11 +42,12 @@
                         </div>
                         <div class="col-xs-3">
                             <label for="claveMateria">Clave de la materia:</label>
-                            <input ng-model="acta.IdMateria" type="text" class="form-control" id="claveMateria" disabled>
+                            <input ng-model="actaActualAdmin.solicitudDocente.idMateria" type="text" class="form-control" id="claveMateria" disabled>
                         </div>
                         <div class="col-xs-3">
                             <label for="tipoExamen">Tipo de examen:</label>
-                            <select ng-model="acta.IdTipoExamen" class="form-control" name="tipoExamen" id="tipoExamen" ng-class="{red: form.tipoExamen.$touched && form.tipoExamen.$invalid}" required>
+                            <select ng-model="acta.IdTipoExamen" class="form-control" name="tipoExamen" id="tipoExamen" ng-class="{red: form.tipoExamen.$touched && form.tipoExamen.$invalid}" required disabled>
+                                <option value="" disabled>{{actaActualAdmin.solicitudDocente.tipoExamen.nombre}}</option>
                                 <option ng-repeat="tipo in tipos" value="{{tipo.id}}">
                                     {{tipo.nombre}}
                                 </option>
@@ -58,21 +60,21 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <label for="subtipoExamen">Subtipo de examen:</label>
-                            <select ng-model="acta.IdSubtipoExamen" name="subtipoExamen" class="form-control" ng-class="{red: form.subtipoExamen.$touched && form.subtipoExamen.$invalid}" required>
-                                <option ng-repeat="subtipo in subtipos" value="{{subtipo.id}}">
-                                    {{subtipo.nombre}}
+                            <select ng-model="acta.IdSubtipoExamen" name="subtipoExamen" class="form-control" ng-class="{red: form.subtipoExamen.$touched && form.subtipoExamen.$invalid}" required disabled>
+                                <option  value="">
+                                    {{actaActualAdmin.subTipoExamen.nombre}}
                                 </option>
                             </select>
                             <span style="color: red;" ng-show="form.subtipoExamen.$touched && form.subtipoExamen.$error.required">Se requiere escoger un subtipo</span>
                         </div>
                         <div class="col-xs-3">
                             <label for="planEstudios">Plan de estudios:</label>
-                            <input ng-model="acta.PlanEstudios" type="text" class="form-control" name="planEstudios" ng-class="{red: form.planEstudios.$touched && form.planEstudios.$invalid}" required>
+                            <input ng-model="actaActualAdmin.planEstudios" type="text" class="form-control" name="planEstudios" ng-class="{red: form.planEstudios.$touched && form.planEstudios.$invalid}" required disabled>
                             <span style="color: red;" ng-show="form.planEstudios.$touched && form.planEstudios.$error.required">Se requiere un plan de estudios</span>
                         </div>
                         <div class="col-xs-3">
                             <label for="semestre">Semestre:</label>
-                            <input ng-model="acta.EtapaSemestre" type="text" class="form-control" name="etapaSemestre" ng-class="{red: form.etapaSemestre.$touched && form.etapaSemestre.$invalid}" required>
+                            <input ng-model="actaActualAdmin.etapaSemestre" type="text" class="form-control" name="etapaSemestre" ng-class="{red: form.etapaSemestre.$touched && form.etapaSemestre.$invalid}" required disabled>
                             <span style="color: red;" ng-show="form.etapaSemestre.$touched && form.etapaSemestre.$error.required">Se requiere un semestre</span>
                         </div>
                     </div>
@@ -81,8 +83,9 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <label for="carreraDocente">Carrera:</label>
-                            <select ng-model="acta.Carrera" ng-change="calculaClaveCarrera()" name="carreraDocente" id="carreraDocente" class="form-control input-sm" ng-class="{red: form.carreraDocente.$touched && form.carreraDocente.$invalid}" required>
-                                <option ng-repeat="carrera in carreras" value="{{carrera}}">
+                            <select ng-model="acta.Carrera" ng-change="calculaClaveCarrera()" name="carreraDocente" id="carreraDocente" class="form-control input-sm" ng-class="{red: form.carreraDocente.$touched && form.carreraDocente.$invalid}" required disabled>
+                                <option value="" disabled>{{actaActualAdmin.solicitudDocente.carrera.nombre}}</option> 
+                                <option  ng-repeat="carrera in carreras" value="{{carrera}}">
                                     {{carrera.nombre}}
                                 </option>
                             </select>
@@ -90,11 +93,11 @@
                         </div>
                         <div class="col-xs-3">
                             <label for="claveCarreraDocente">Clave de la carrera:</label>
-                            <input ng-model="acta.IdCarrera" type="text" class="form-control" id="claveCarreraDocente" disabled>
+                            <input ng-model="actaActual.idCarrera" type="text" class="form-control" id="claveCarreraDocente" disabled>
                         </div>
                         <div class="col-xs-3">
                             <label for="grupoDocente">Grupo:</label>
-                            <input ng-model="grupo" type="number" class="form-control" name="grupoDocente" id="grupoDocente" ng-class="{red: form.grupoDocente.$touched && form.grupoDocente.$invalid}" required>
+                            <input ng-model="alumnoActual[0].alumno.grupo" type="number" class="form-control" name="grupoDocente" id="grupoDocente" ng-class="{red: form.grupoDocente.$touched && form.grupoDocente.$invalid}" required disabled>
                             <span style="color: red;" ng-show="form.grupoDocente.$touched && form.grupoDocente.$error.required">Se requiere un grupo</span>
                         </div>
                     </div>
@@ -103,19 +106,19 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <label for="nombreDocente">Nombre</label>
-                            <input ng-model="usuarioAutenticado.nombre" type="text" class="form-control" id="nombreDocente" disabled>
+                            <input ng-model="actaActual.empleado.nombre" type="text" class="form-control" id="nombreDocente" disabled>
                         </div>
                         <div class="col-xs-2">
                             <label for="apellidoPaterno">Apellido paterno:</label>
-                            <input ng-model="usuarioAutenticado.apellidoP" type="text" class="form-control" id="apellidoPaterno" disabled>
+                            <input ng-model="actaActual.empleado.apellidoP" type="text" class="form-control" id="apellidoPaterno" disabled>
                         </div>
                         <div class="col-xs-2">
                             <label for="apellidoMaterno">Apellido materno:</label>
-                            <input ng-model="usuarioAutenticado.apellidoM" type="text" class="form-control" id="apellidoMaterno" disabled>
+                            <input ng-model="actaActual.empleado.apellidoM" type="text" class="form-control" id="apellidoMaterno" disabled>
                         </div>
                         <div class="col-xs-3">
                             <label for="numeroEmpleadoDocente">Numero de empleado:</label>
-                            <input type="number" ng-model="acta.IdEmpleado" class="form-control" id="numeroEmpleadoDocente" disabled>
+                            <input type="number" ng-model="actaActual.empleado.id" class="form-control" id="numeroEmpleadoDocente" disabled>
                         </div>
                     </div>
                 </div>
@@ -135,13 +138,13 @@
                                             <th>Calificaci&oacute;n:</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody> 
                                         <tr ng-repeat="solicitud in solicitudesAlumno">
-                                            <td><input ng-model="solicitud.Alumno.Id" name="Matricula" type="number" class="form-control" ng-class="{red: form.Matricula.$touched && form.Matricula.$invalid}" pattern="[[0-9.]+" ng-pattern-restrict required></td>
-                                            <td><input ng-model="solicitud.Alumno.Nombre" name="Nombre" type="text" class="form-control" ng-class="{red: form.Nombre.$touched && form.Nombre.$invalid}" pattern="[A-zÀ-ÿ ]+" ng-pattern-restrict required></td>
-                                            <td><input ng-model="solicitud.Alumno.ApellidoP" name="ApellidoP" type="text" class="form-control" ng-class="{red: form.ApellidoP.$touched && form.ApellidoP.$invalid}" pattern="[A-zÀ-ÿ ]+" ng-pattern-restrict required></td>
-                                            <td><input ng-model="solicitud.Alumno.ApellidoM" name="ApellidoM" type="text" class="form-control" ng-class="{red: form.ApellidoM.$touched && form.ApellidoM.$invalid}" pattern="[A-zÀ-ÿ ]+" ng-pattern-restrict required></td>
-                                            <td><input ng-model="solicitud.Alumno.Promedio" name="Promedio" type="number" class="form-control" ng-class="{red: form.Promedio.$touched && form.Promedio.$invalid}" pattern="[[0-9.]+" ng-pattern-restrict required></td>
+                                            <td><input ng-model="solicitud.alumno.id" name="Matricula" type="number" class="form-control" ng-class="{red: form.Matricula.$touched && form.Matricula.$invalid}" pattern="[[0-9.]+" ng-pattern-restrict required disabled></td>
+                                            <td><input ng-model="solicitud.alumno.nombre" name="Nombre" type="text" class="form-control" ng-class="{red: form.Nombre.$touched && form.Nombre.$invalid}" pattern="[A-zÀ-ÿ]+" ng-pattern-restrict required disabled></td>
+                                            <td><input ng-model="solicitud.alumno.apellidoP" name="ApellidoP" type="text" class="form-control" ng-class="{red: form.ApellidoP.$touched && form.ApellidoP.$invalid}" pattern="[A-zÀ-ÿ]+" ng-pattern-restrict required disabled></td>
+                                            <td><input ng-model="solicitud.alumno.apellidoM" name="ApellidoM" type="text" class="form-control" ng-class="{red: form.ApellidoM.$touched && form.ApellidoM.$invalid}" pattern="[A-zÀ-ÿ]+" ng-pattern-restrict required disabled></td>
+                                            <td><input ng-model="solicitud.alumno.promedio" name="Promedio" type="number" class="form-control" ng-class="{red: form.Promedio.$touched && form.Promedio.$invalid}" pattern="[[0-9.]+" ng-pattern-restrict required disabled></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -153,25 +156,14 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-10">
-                            <button ng-click="agregarColumna()" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar columna</button>
-                            <button ng-click="removerColumna()" type="button" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-minus-sign"></span> Eliminar columna</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-10">
                             <label for="motivoDocente">Motivo por el cual se hace la solicitud:</label>
-                            <textarea ng-model="acta.Motivo" class="form-control" rows="4" name="motivo" ng-class="{red: form.motivo.$touched && form.motivo.$invalid}" required></textarea>
+                            <textarea ng-model="actaActualAdmin.motivo" class="form-control" rows="4" name="motivo" ng-class="{red: form.motivo.$touched && form.motivo.$invalid}" required disabled></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-8">
-
-                    </div>
-                    <div class="col-md-2">
-                        <input type="submit" ng-disabled="form.$invalid" ng-click="grabarActaAdmin()" value="Enviar" class="btn btn-primary">
+                    <div class="col-md-3">
+                        <button type="button" ng-hide="actaActualAdmin.solicitudDocente.empleado.id !== 1" class="btn btn-default"><span class="glyphicon glyphicon-open-file"></span> Generar acta en PDF</button>
                     </div>
                 </div>
             </form>

@@ -37,7 +37,8 @@ namespace CAEF
         {
             // Carga archivo de configuración
             services.AddSingleton(_config);
-
+            //cargar datos RSignal
+            services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
             // Contexts de base de datos
             services.AddDbContext<UsuarioUABCContext>();
             services.AddDbContext<UsuarioFIADContext>();
@@ -66,6 +67,7 @@ namespace CAEF
             services.AddScoped<UsuarioRepository>();
             services.AddScoped<CarreraRepository>();
             services.AddScoped<MateriaRepository>();
+            services.AddScoped<ActasAdministrativasRepository>();
 
             // Servicios
             services.AddScoped<LoginServices>();
@@ -103,6 +105,8 @@ namespace CAEF
                 config.CreateMap<ActaAdminDTO, SolicitudAdmin>().ReverseMap();
                 config.CreateMap<AlumnoDTO, Alumno>().ReverseMap();
                 config.CreateMap<SolicitudAlumnoDTO, SolicitudAlumno>().ReverseMap();
+                config.CreateMap<SolicitudAlumnoDTO2, SolicitudAlumno>().ReverseMap();
+                config.CreateMap<ActaAdministradorDTO, SolicitudAdmin>().ReverseMap();
             });
 
             loggerFactory.AddConsole();

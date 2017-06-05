@@ -24,7 +24,8 @@ namespace CAEF.Controllers
 
         private UsuarioServices _servicioUsuario;
         private RolServices _serviocioRol;
-        private SolicitudAdministrativaServices _servicioSolicitud;        
+        private SolicitudAdministrativaServices _servicioSolicitud;
+        public static IEnumerable<int> idsSolicitud;
 
         public CAEFController(IFIADRepository repositorioFIAD,
             UsuarioServices repositorioUsuario, RolServices servicioRol,
@@ -56,33 +57,70 @@ namespace CAEF.Controllers
         }
 
         [Authorize]
-        [HttpGet("Acta/{id?}")]
-        public IActionResult SolicitarActaGenerada(int id)
+        [HttpGet("RevisarActa/{id}")]
+        public IActionResult RevisarActaAdmin()
         {
             var usuarioActual = _servicioUsuario.UsuarioAutenticado(User.Identity.Name);
-            SolicitudDocente solicitud = _servicioSolicitud.ObtenerSolicitudDocente(id);
+
+            if (usuarioActual.RolId == 1)
+            {
+                return View();
+            }
+            else
+            {
+                return View("RevisarActaDocente");
+            }
+        }
+
+
+        [Authorize]
+        [HttpGet("VerActa/{id?}")]
+        public IActionResult VerActa(int id)
+        {
+            #region >v
+            //var usuarioActual = _servicioUsuario.UsuarioAutenticado(User.Identity.Name);
+            //SolicitudDocente solicitud = _servicioSolicitud.ObtenerSolicitudDocente(id);
+
+            //if (solicitud == null)
+            //    return Redirect("/");
+            //else if (usuarioActual.RolId == 1)
+            //    return View();
+            //else
+            //    return Redirect("/");
+            #endregion
+
+            var usuarioActual = _servicioUsuario.UsuarioAutenticado(User.Identity.Name);
+            SolicitudAdmin solicitud = _servicioSolicitud.ObtenerSolicitudAministrativa(id);
 
             if (solicitud == null)
                 return Redirect("/");
-            else if (usuarioActual.RolId == 1)
+            else 
                 return View();
-            else
-                return Redirect("/");
         }
 
         [Authorize]
-        [HttpGet("CAEF/Acta/{id?}")]
-        public IActionResult VerActa(int id)
+        [HttpGet("CAEF/VerActa/{id?}")]
+        public IActionResult VerActaA(int id)
         {
+            #region alomejor se ocupa :v
+            //var usuarioActual = _servicioUsuario.UsuarioAutenticado(User.Identity.Name);
+            //SolicitudDocente solicitud = _servicioSolicitud.ObtenerSolicitudDocente(id);
+
+            //if (solicitud == null)
+            //    return Redirect("/");
+            //else if (usuarioActual.RolId == 1)
+            //    return Ok(solicitud);
+            //else
+            //    return Redirect("/");
+            #endregion
+
             var usuarioActual = _servicioUsuario.UsuarioAutenticado(User.Identity.Name);
-            SolicitudDocente solicitud = _servicioSolicitud.ObtenerSolicitudDocente(id);
+            SolicitudAdmin solicitud = _servicioSolicitud.ObtenerSolicitudAministrativa(id);
 
             if (solicitud == null)
                 return Redirect("/");
-            else if (usuarioActual.RolId == 1)
-                return Ok(solicitud);
             else
-                return Redirect("/");
+                return Ok(solicitud);
         }
 
         [Authorize]
@@ -90,6 +128,23 @@ namespace CAEF.Controllers
         public async Task<IActionResult> AgregarActaDocente([FromBody] ActaDocenteDTO acta)
         {
             var id = _servicioSolicitud.AgregarActaDocente(Mapper.Map<SolicitudDocente>(acta));
+
+            if (id != 0)
+            {
+                await _servicioUsuario.GuardarCambios();
+                return Ok(id);
+            }
+            else
+            {
+                return BadRequest("Ocurrió un error al agregar solicitud.");
+            }
+        }
+
+        [Authorize]
+        [HttpPost("CAEF/EditarActaDocente")]
+        public async Task<IActionResult> EditarActaDocente([FromBody] ActaDocenteDTO acta)
+        {
+            var id = _servicioSolicitud.ActualizarActaDocente(Mapper.Map<SolicitudDocente>(acta));
 
             if (id != 0)
             {
@@ -120,11 +175,12 @@ namespace CAEF.Controllers
 
         [Authorize]
         [HttpPost("CAEF/AgregarSolicitudAlumno")]
-        public async Task<IActionResult> AgregarSolicitudAlumno([FromBody] IEnumerable<SolicitudAlumnoDTO> solicitud)
-        {
-            if(solicitud != null)
+        public async Task<IActionResult> AgregarSolicitudAlumno([FromBody] IEnumerable<SolicitudAlumnoDTO2> solicitud)
             {
-                _servicioSolicitud.AgregarSolicitudAlumno(Mapper.Map<IEnumerable<SolicitudAlumno>>(solicitud));
+
+            if (solicitud != null)
+            {
+                _servicioSolicitud.AgregarSolicitudAlumno(Mapper.Map<IEnumerable<SolicitudAlumno>>(solicitud),idsSolicitud);
 
                 if (await _servicioUsuario.GuardarCambios())
                 {
@@ -134,11 +190,10 @@ namespace CAEF.Controllers
             return BadRequest("Ocurrió un error al agregar solicitud.");
         }
 
-
         [HttpGet("GenerarPDF/{id}")]
         public FileStreamResult GenerarPDF(int id)
         {
-            SolicitudAdmin admin = _servicioSolicitud.ObtenerSolicitudAdmin(id);
+            SolicitudAdmin admin = _servicioSolicitud.ObtenerSolicitudAministrativa(id);
             SolicitudDocente docente = _servicioSolicitud.ObtenerSolicitudDocente(id);
             IEnumerable<SolicitudAlumno> alumnos = _servicioSolicitud.ObtenerSolicitudesAlumno(docente.Id);
             Usuario solicitante = _servicioUsuario.ObtenerUsuario(docente.IdEmpleado);
@@ -203,7 +258,7 @@ namespace CAEF.Controllers
             examenInfo.Alignment = Element.ALIGN_CENTER;
             document.Add(examenInfo);
             document.Add(Chunk.Newline);
-            
+
             PdfPTable table = new PdfPTable(11);
             table.TotalWidth = 500f;
             table.LockedWidth = true;
@@ -235,7 +290,7 @@ namespace CAEF.Controllers
             PdfPCell unidadAcademica = new PdfPCell(new Phrase(admin.UnidadAcademica));
             unidadAcademica.Colspan = 4;
             unidadAcademica.HorizontalAlignment = 1;
-            PdfPCell claveCarrera = new PdfPCell(new Phrase(carrera.Id+""));
+            PdfPCell claveCarrera = new PdfPCell(new Phrase(carrera.Id + ""));
             claveCarrera.Colspan = 1;
             claveCarrera.HorizontalAlignment = 1;
             PdfPCell celdaCarrera = new PdfPCell(new Phrase(carrera.Nombre));
@@ -269,7 +324,7 @@ namespace CAEF.Controllers
             PeriodoT.Colspan = 2;
             PeriodoT.HorizontalAlignment = 1;
             PeriodoT.BackgroundColor = new BaseColor(193, 193, 193);
-            PdfPCell claveMateria = new PdfPCell(new Phrase(materia.Id+""));
+            PdfPCell claveMateria = new PdfPCell(new Phrase(materia.Id + ""));
             claveMateria.Colspan = 1;
             claveMateria.HorizontalAlignment = 1;
             PdfPCell Materia = new PdfPCell(new Phrase(materia.Nombre));
@@ -341,18 +396,18 @@ namespace CAEF.Controllers
             tablaAlumnos.AddCell(CalificacionT);
 
             int count = 1;
-            foreach(SolicitudAlumno solicitud in alumnos)
+            foreach (SolicitudAlumno solicitud in alumnos)
             {
-                PdfPCell Contador = new PdfPCell(new Phrase(count+++""));
+                PdfPCell Contador = new PdfPCell(new Phrase(count++ + ""));
                 Contador.Colspan = 1;
                 Contador.HorizontalAlignment = 1;
-                PdfPCell NombreAlumno = new PdfPCell(new Phrase(solicitud.Alumno.Nombre+" "+solicitud.Alumno.ApellidoP+" "+solicitud.Alumno.ApellidoM));
+                PdfPCell NombreAlumno = new PdfPCell(new Phrase(solicitud.Alumno.Nombre + " " + solicitud.Alumno.ApellidoP + " " + solicitud.Alumno.ApellidoM));
                 NombreAlumno.Colspan = 6;
                 NombreAlumno.HorizontalAlignment = 1;
-                PdfPCell Matricula = new PdfPCell(new Phrase(solicitud.Alumno.Id+""));
+                PdfPCell Matricula = new PdfPCell(new Phrase(solicitud.Alumno.Id + ""));
                 Matricula.Colspan = 2;
                 Matricula.HorizontalAlignment = 1;
-                PdfPCell Calificacion = new PdfPCell(new Phrase(solicitud.Alumno.Promedio+""));
+                PdfPCell Calificacion = new PdfPCell(new Phrase(solicitud.Alumno.Promedio + ""));
                 Calificacion.Colspan = 2;
                 Calificacion.HorizontalAlignment = 1;
 
@@ -386,6 +441,34 @@ namespace CAEF.Controllers
             workStream.Position = 0;
 
             return new FileStreamResult(workStream, "application/pdf");
+        }
+
+        [Authorize]
+        [HttpPost("CAEF/ObtenerIdSolicitud")]
+        public async Task<IActionResult> ObtenerIDS([FromBody] IEnumerable<int> Ids)
+        {
+
+                idsSolicitud = Ids;
+
+           return Ok("Se obtuvieron los Ids");
+
+        }
+
+        [Authorize]
+        [HttpPost("CAEF/RemoverSolcitudAlumno")]
+        public async Task<IActionResult> RemoverSolicitudAlumno([FromBody] SolicitudAlumnoDTO2 solicitudAlumno)
+        {
+
+            if (solicitudAlumno != null)
+            {
+                _servicioSolicitud.BorrarSolcitudAlumno(Mapper.Map<SolicitudAlumno>(solicitudAlumno));
+
+                if (await _servicioUsuario.GuardarCambios())
+                {
+                    return Ok();
+                }
+            }
+            return BadRequest("Ocurrió un error al remover la solicitud.");
         }
 
         [Authorize]
@@ -426,6 +509,23 @@ namespace CAEF.Controllers
         {
             var tipos = _servicioSolicitud.ObtenerTiposExamen();
             return Ok(tipos);
+        }
+
+        [Authorize]
+        [HttpGet("/CAEF/RevisarActa/{id}")]
+        public IActionResult RevisarActaAdmin(int id)
+        {
+            var acta = _servicioSolicitud.ObtenerActaActual(id);
+            return Ok(acta);
+        }
+
+        [Authorize]
+        [HttpGet("/caef/ObtenerAlumno/{id}")]
+        public IActionResult obtenerAlumnodeActa(int id)
+        {
+            var alumno = _servicioSolicitud.ObtenerAlumnos(id);
+            var alumnosDTO = Mapper.Map<IEnumerable<SolicitudAlumnoDTO>>(alumno);
+            return Ok(alumnosDTO);
         }
     }
 }
