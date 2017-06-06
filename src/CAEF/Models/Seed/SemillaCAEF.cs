@@ -33,7 +33,7 @@ namespace CAEF.Models.Seed
 
                 var rolUsuario = new Rol()
                 {
-                    Nombre = "Usuario"
+                    Nombre = "Docente"
                 };
 
                 _context.Roles.Add(rolAmin);

@@ -74,6 +74,23 @@ namespace CAEF.Models.Seed
 
                 await _context.SaveChangesAsync();
             }
+
+            if (await _userManager.FindByEmailAsync("jesus.augusto.garcia.caro@uabc.edu.mx") == null)
+            {
+                var Chuy = new UsuarioUABC()
+                {
+                    Matricula = 334816,
+                    UserName = "jesus.augusto.garcia.caro",
+                    Nombre = "Jesús Augusto",
+                    ApellidoP = "García",
+                    ApellidoM = "Caro",
+                    Email = "jesus.augusto.garcia.caro@uabc.edu.mx"
+                };
+
+                var result = await _userManager.CreateAsync(Chuy, "password");
+
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

@@ -53,6 +53,21 @@ namespace CAEF.Models.Seed
                 _context.UsuariosFIAD.Add(usuarioC);
                 await _context.SaveChangesAsync();
             }
+
+            if(_context.UsuariosFIAD.Where(u => u.Id == 334816).FirstOrDefault() == null)
+            {
+                var Chuy = new UsuarioFIAD()
+                {
+                    Id = 334816,
+                    Nombre = "Jesús Augusto",
+                    ApellidoP = "García",
+                    ApellidoM = "Caro",
+                    Correo = "jesus.augusto.garcia.caro@uabc.edu.mx"
+                };
+
+                _context.UsuariosFIAD.Add(Chuy);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

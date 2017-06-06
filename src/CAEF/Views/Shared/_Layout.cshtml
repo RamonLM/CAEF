@@ -26,7 +26,7 @@
             <h3 id="h3Menu">Menu</h3>
             <ul ng-controller="MenuController" class="nav nav-pills nav-stacked col-md-2">
                 <li><label><span class="glyphicon glyphicon-user"></span> {{usuarioAutenticado.nombre}}</label></li>
-                <li><label>Online: <span id="online">0</span></label></li>
+                <!--<li><label>Online: <span id="online">0</span></label></li>-->
                 <li ng-class="{ active: isActive('/')}"><a href="/"><span class="glyphicon glyphicon-home"></span>  Inicio</a></li>
                 <li ng-show="usuarioAutenticado.rolId == 1" ng-class="{ active: isActive('/AgregarUsuario') || isActive('/Usuarios')}" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -57,7 +57,8 @@
                     </ul>
                 </li>
                 <li><a href="~/Notificaciones"><span class="glyphicon glyphicon-bell"></span>  Notificaciones</a></li>
-                <li><a href="#" data-toggle="pill"><span class="glyphicon glyphicon-info-sign"></span> Ayuda</a></li>
+                <li ng-show="usuarioAutenticado.rolId == 1"><a href="https://www.youtube.com/playlist?list=PLyleZVh4dBNpU9GRrELVYsApLCOR2TZsJ" target="_blank"><span class="glyphicon glyphicon-info-sign"></span> Ayuda</a></li>
+                <li ng-show="usuarioAutenticado.rolId == 2"><a href="https://www.youtube.com/playlist?list=PLyleZVh4dBNo473Jtac2NOMm42G8xLR3H" target="_blank"><span class="glyphicon glyphicon-info-sign"></span> Ayuda</a></li>
                 <li><a href="~/Logout"><span class="glyphicon glyphicon-off"></span> Cerrar sesi&oacute;n</a></li>
             </ul>
             @RenderBody()

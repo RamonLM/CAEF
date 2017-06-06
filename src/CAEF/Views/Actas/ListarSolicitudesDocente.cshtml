@@ -34,7 +34,7 @@
                         <td>{{acta.etapaSemestre}}</td>
                         <td>{{acta.solicitudDocente.estado.nombre}}</td>
                         <td><a ng-hide="acta.idEstado === 2" class="btn btn-primary btn-xs" data-toggle="modal" href="/VerActa/{{acta.idSolicitud}}"><span class="glyphicon glyphicon-edit"></span></a></td>
-                        <td><a ng-hide="acta.idEstado === 2" class="btn btn-primary btn-xs" data-toggle="modal" href="/RevisarActa/{{acta.id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td><a ng-hide="acta.idEstado === 2" class="btn btn-primary btn-xs" data-toggle="modal" href="/GenerarPDF/{{acta.idSolicitud}}"><span class="glyphicon glyphicon-edit"></span></a></td>
                     </tr>
                 </tbody>
             </table>

@@ -93,9 +93,9 @@
                                     <tbody>
                                         <tr ng-repeat="solicitud in solicitudesAlumno">
                                             <td><input ng-model="solicitud.Alumno.Id" name="Matricula" type="number" class="form-control" ng-class="{red: form.Matricula.$touched && form.Matricula.$invalid}" pattern="[[0-9.]+" ng-pattern-restrict required></td>
-                                            <td><input ng-model="solicitud.Alumno.Nombre" name="Nombre" type="text" class="form-control" ng-class="{red: form.Nombre.$touched && form.Nombre.$invalid}" pattern="[A-zÀ-ÿ]+" ng-pattern-restrict required></td>
-                                            <td><input ng-model="solicitud.Alumno.ApellidoP" name="ApellidoP" type="text" class="form-control" ng-class="{red: form.ApellidoP.$touched && form.ApellidoP.$invalid}" pattern="[A-zÀ-ÿ]+" ng-pattern-restrict required></td>
-                                            <td><input ng-model="solicitud.Alumno.ApellidoM" name="ApellidoM" type="text" class="form-control" ng-class="{red: form.ApellidoM.$touched && form.ApellidoM.$invalid}" pattern="[A-zÀ-ÿ]+" ng-pattern-restrict required></td>
+                                            <td><input ng-model="solicitud.Alumno.Nombre" name="Nombre" type="text" class="form-control" ng-class="{red: form.Nombre.$touched && form.Nombre.$invalid}" pattern="[A-zÀ-ÿ ]+" ng-pattern-restrict required></td>
+                                            <td><input ng-model="solicitud.Alumno.ApellidoP" name="ApellidoP" type="text" class="form-control" ng-class="{red: form.ApellidoP.$touched && form.ApellidoP.$invalid}" pattern="[A-zÀ-ÿ ]+" ng-pattern-restrict required></td>
+                                            <td><input ng-model="solicitud.Alumno.ApellidoM" name="ApellidoM" type="text" class="form-control" ng-class="{red: form.ApellidoM.$touched && form.ApellidoM.$invalid}" pattern="[A-zÀ-ÿ ]+" ng-pattern-restrict required></td>
                                             <td><input ng-model="solicitud.Alumno.Promedio" name="Promedio" type="number" class="form-control" ng-class="{red: form.Promedio.$touched && form.Promedio.$invalid}" pattern="[[0-9.]+" ng-pattern-restrict required></td>
                                         </tr>
                                     </tbody>

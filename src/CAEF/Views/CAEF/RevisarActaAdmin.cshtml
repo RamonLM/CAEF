@@ -32,7 +32,7 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <label for="nombreMateriaDocente">Nombre de la materia:</label>
-                            <select ng-model="acta.materia" ng-change="calculaClaveMateria()" name="nombreMateria" id="nombreMateria" class="form-control input-sm" ng-class="{red: form.nombreMateria.$dirty && form.nombreMateria.$invalid}" required>
+                            <select ng-model="acta.materia" ng-change="calculaClaveMateria()" name="nombreMateria" id="nombreMateria" class="form-control input-sm" ng-class="{red: form.nombreMateria.$dirty && form.nombreMateria.$invalid}">
                                 <option value="" disabled>{{actaActual.materia.nombre}}</option>
                                 <option ng-repeat="materia in materias | filter: filtraMaterias" value="{{materia}}">
                                     {{materia.nombre}}
@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-xs-3">
                             <label for="tipoExamen">Tipo de examen:</label>
-                            <select ng-model="acta.IdTipoExamen" class="form-control" name="tipoExamen" id="tipoExamen" ng-class="{red: form.tipoExamen.$touched && form.tipoExamen.$invalid}" required>
+                            <select ng-model="acta.IdTipoExamen" class="form-control" name="tipoExamen" id="tipoExamen" ng-class="{red: form.tipoExamen.$touched && form.tipoExamen.$invalid}">
                                 <option value="" disabled>{{actaActual.tipoExamen.nombre}}</option>
                                 <option ng-repeat="tipo in tipos" value="{{tipo.id}}">
                                     {{tipo.nombre}}
@@ -83,7 +83,7 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <label for="carreraDocente">Carrera:</label>
-                            <select ng-model="acta.Carrera" ng-change="calculaClaveCarrera()" name="carreraDocente" id="carreraDocente" class="form-control input-sm" ng-class="{red: form.carreraDocente.$touched && form.carreraDocente.$invalid}" required>
+                            <select ng-model="acta.Carrera" ng-change="calculaClaveCarrera()" name="carreraDocente" id="carreraDocente" class="form-control input-sm" ng-class="{red: form.carreraDocente.$touched && form.carreraDocente.$invalid}">
                                 <option value="" disabled>{{actaActual.carrera.nombre}}</option> 
                                 <option  ng-repeat="carrera in carreras" value="{{carrera}}">
                                     {{carrera.nombre}}
@@ -165,14 +165,14 @@
                     <div class="row">
                         <div class="col-xs-10">
                             <label for="motivoDocente">Motivo por el cual se hace la solicitud:</label>
-                            <textarea ng-model="acta.Motivo" class="form-control" rows="4" name="motivo" ng-class="{red: form.motivo.$touched && form.motivo.$invalid}" required></textarea>
+                            <textarea ng-model="acta.motivo" class="form-control" rows="4" name="motivo" ng-class="{red: form.motivo.$touched && form.motivo.$invalid}" disabled></textarea>
                         </div>
                     </div>
                 </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-10">
-                                <button ng-click="grabarActaAdminActual()" type="button" value="Enviar" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span>Aceptar Solicitud</button>
+                                <button ng-click="grabarActaAdminActual()" ng-disabled="form.$invalid" type="button" value="Enviar" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span>Aceptar Solicitud</button>
                                 <button ng-click="rechazarActaAdminActual()" type="button" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-minus-sign"></span>Rechazar Solicitud</button>
                             </div>
                         </div>

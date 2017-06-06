@@ -30,7 +30,7 @@
     $scope.editarUsuario = function (usuario, listaRoles) {
         $scope.error = "";
         ModalService.showModal({
-            templateUrl: "views/editarUsuario.html",
+            templateUrl: "https://caefuabc.azurewebsites.net/views/editarUsuario.html",
             controller: "EditarController",
             inputs: {
                 usuario: usuario,
@@ -45,7 +45,7 @@
                     $http.post("/Usuarios/Editar", usuario)
                     .then(function (response) {
                         ModalService.showModal({
-                            templateUrl: "views/mensajeGenerico.html",
+                            templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                             controller: "MensajeController",
                             inputs: {
                                 mensaje: response.data
@@ -59,7 +59,7 @@
 
                     }, function (error) {
                         ModalService.showModal({
-                            templateUrl: "views/mensajeGenerico.html",
+                            templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                             controller: "MensajeController",
                             inputs: {
                                 mensaje: error.data
@@ -80,7 +80,7 @@
         $scope.error = "";
         console.log("Quieres borrar usuario:" + usuario.correo);
         ModalService.showModal({
-            templateUrl: "views/borrarUsuario.html",
+            templateUrl: "https://caefuabc.azurewebsites.net/views/borrarUsuario.html",
             controller: "BorrarController"
         }).then(function (modal) {
             modal.element.modal();
@@ -89,7 +89,7 @@
                     $http.post("/Usuarios/Borrar", usuario)
                         .then(function (response) {
                             ModalService.showModal({
-                                templateUrl: "views/mensajeGenerico.html",
+                                templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                                 controller: "MensajeController",
                                 inputs: {
                                     mensaje: response.data
@@ -102,7 +102,7 @@
                             });
                         }, function (error) {
                             ModalService.showModal({
-                                templateUrl: "views/mensajeGenerico.html",
+                                templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                                 controller: "MensajeController",
                                 inputs: {
                                     mensaje: error.data
@@ -149,7 +149,7 @@ app.controller('AgregarController', function ($scope, $http, $window, $location,
             console.log("Success");
             console.log(response);
             ModalService.showModal({
-                templateUrl: "views/mensajeGenerico.html",
+                templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                 controller: "MensajeController",
                 inputs: {
                     mensaje: response.data
@@ -163,7 +163,7 @@ app.controller('AgregarController', function ($scope, $http, $window, $location,
         }, function (error) {
             console.log(error);
             ModalService.showModal({
-                templateUrl: "views/mensajeGenerico.html",
+                templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                 controller: "MensajeController",
                 inputs: {
                     mensaje: error.data

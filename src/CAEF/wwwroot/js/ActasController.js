@@ -289,7 +289,7 @@
             }, function (error) {
                 console.log(error);
                 ModalService.showModal({
-                    templateUrl: "views/mensajegenerico.html",
+                    templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                     controller: "MensajeController",
                     inputs: {
                         mensaje: error.data
@@ -326,7 +326,7 @@
 
 
                                 ModalService.showModal({
-                                    templateUrl: "views/mensajeGenerico.html",
+                                    templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                                     controller: "MensajeController",
                                     inputs: {
                                         mensaje: response.data
@@ -344,7 +344,7 @@
                             }, function (error) {
                                 console.log(error);
                                 ModalService.showModal({
-                                    templateUrl: "views/mensajeGenerico.html",
+                                    templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                                     controller: "MensajeController",
                                     inputs: {
                                         mensaje: error.data
@@ -360,7 +360,7 @@
                     }, function (error) {
                         console.log(error);
                         ModalService.showModal({
-                            templateUrl: "views/mensajeGenerico.html",
+                            templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                             controller: "MensajeController",
                             inputs: {
                                 mensaje: error.data
@@ -376,7 +376,7 @@
             }, function (error) {
                 console.log(error);
                 ModalService.showModal({
-                    templateUrl: "views/mensajeGenerico.html",
+                    templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                     controller: "MensajeController",
                     inputs: {
                         mensaje: error.data
@@ -435,7 +435,7 @@
 
 
                                 ModalService.showModal({
-                                    templateUrl: "views/mensajeGenerico.html",
+                                    templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                                     controller: "MensajeController",
                                     inputs: {
                                         mensaje: response.data
@@ -453,7 +453,7 @@
                             }, function (error) {
                                 console.log(error);
                                 ModalService.showModal({
-                                    templateUrl: "views/mensajeGenerico.html",
+                                    templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                                     controller: "MensajeController",
                                     inputs: {
                                         mensaje: error.data
@@ -469,7 +469,7 @@
                     }, function (error) {
                         console.log(error);
                         ModalService.showModal({
-                            templateUrl: "views/mensajeGenerico.html",
+                            templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                             controller: "MensajeController",
                             inputs: {
                                 mensaje: error.data
@@ -485,7 +485,7 @@
             }, function (error) {
                 console.log(error);
                 ModalService.showModal({
-                    templateUrl: "views/mensajeGenerico.html",
+                    templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                     controller: "MensajeController",
                     inputs: {
                         mensaje: error.data
@@ -505,7 +505,7 @@
 
 
         ModalService.showModal({
-            templateUrl: "views/rechazarActa.html",
+            templateUrl: "https://caefuabc.azurewebsites.net/views/rechazarActa.html",
             controller: "RechazarController",
             inputs: {
                 actaActual: $scope.actaActual
@@ -523,7 +523,7 @@
                             console.log("Success");
                             console.log(response);
                             ModalService.showModal({
-                                templateUrl: "views/mensajeGenerico.html",
+                                templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                                 controller: "MensajeController",
                                 inputs: {
                                     mensaje: response.data
@@ -539,7 +539,7 @@
                         }, function (error) {
                             console.log(error);
                             ModalService.showModal({
-                                templateUrl: "views/mensajeGenerico.html",
+                                templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                                 controller: "MensajeController",
                                 inputs: {
                                     mensaje: error.data
@@ -584,7 +584,7 @@
                         console.log("Success");
                         console.log(response);
                         ModalService.showModal({
-                            templateUrl: "views/mensajeGenerico.html",
+                            templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                             controller: "MensajeController",
                             inputs: {
                                 mensaje: response.data
@@ -598,7 +598,7 @@
                     }, function (error) {
                         console.log(error);
                         ModalService.showModal({
-                            templateUrl: "views/mensajeGenerico.html",
+                            templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                             controller: "MensajeController",
                             inputs: {
                                 mensaje: error.data
@@ -614,7 +614,7 @@
             }, function (error) {
                 console.log(error);
                 ModalService.showModal({
-                    templateUrl: "views/mensajeGenerico.html",
+                    templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                     controller: "MensajeController",
                     inputs: {
                         mensaje: error.data
@@ -657,7 +657,7 @@
             }, function (error) {
                 console.log(error);
                 ModalService.showModal({
-                    templateUrl: "/views/mensajegenerico.html",
+                    templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                     controller: "MensajeController",
                     inputs: {
                         mensaje: error.data
@@ -684,7 +684,7 @@
                         console.log("Success");
                         console.log(response);
                         ModalService.showModal({
-                            templateUrl: "views/mensajegenerico.html",
+                            templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                             controller: "MensajeController",
                             inputs: {
                                 mensaje: response.data
@@ -698,7 +698,7 @@
                     }, function (error) {
                         console.log(error);
                         ModalService.showModal({
-                            templateUrl: "views/mensajegenerico.html",
+                            templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                             controller: "MensajeController",
                             inputs: {
                                 mensaje: error.data
@@ -714,7 +714,7 @@
             }, function (error) {
                 console.log(error);
                 ModalService.showModal({
-                    templateUrl: "views/mensajegenerico.html",
+                    templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                     controller: "MensajeController",
                     inputs: {
                         mensaje: error.data

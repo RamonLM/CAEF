@@ -231,6 +231,7 @@ namespace CAEF.Services
                 .Include(s => s.SolicitudDocente.Carrera)
                 .Include(s => s.SolicitudDocente.Materia)
                 .Include(s => s.SolicitudDocente.TipoExamen)
+                .Include(s => s.SubTipoExamen)
                 .Where(s => s.IdSolicitud == id)
                 .FirstOrDefault();
 

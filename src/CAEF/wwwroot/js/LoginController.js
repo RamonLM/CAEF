@@ -12,7 +12,7 @@
         }, function (error) {
             console.log(error);
             ModalService.showModal({
-                templateUrl: "views/mensajeGenerico.html",
+                templateUrl: "https://caefuabc.azurewebsites.net/views/mensajeGenerico.html",
                 controller: "MensajeController",
                 inputs: {
                     mensaje: error.data

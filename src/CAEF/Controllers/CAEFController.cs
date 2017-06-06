@@ -149,6 +149,12 @@ namespace CAEF.Controllers
             if (id != 0)
             {
                 await _servicioUsuario.GuardarCambios();
+
+                if(acta.IdEstado == 2)
+                {
+                    // Correo aquí
+                }
+
                 return Ok(id);
             }
             else
